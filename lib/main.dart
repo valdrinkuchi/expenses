@@ -1,6 +1,5 @@
 import 'package:expenses/widgets/new_transaction.dart';
 import 'package:expenses/widgets/transaction_list.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:expenses/models/transaction.dart';
 
@@ -13,11 +12,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Expenses',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          primarySwatch: Colors.red,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          fontFamily: 'Quicksand',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                headline6: TextStyle(
+                    fontFamily: 'Opensen',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+          appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                  headline6: TextStyle(
+                      fontFamily: 'Opensans',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)))),
       home: MyHomePage(),
     );
   }
@@ -30,18 +41,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: '1',
-      title: 'Jacket',
-      amount: 71.25,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'Shirt',
-      amount: 23.44,
-      date: DateTime.now(),
-    )
+    // Transaction(
+    //   id: '1',
+    //   title: 'Jacket',
+    //   amount: 71.25,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: '2',
+    //   title: 'Shirt',
+    //   amount: 23.44,
+    //   date: DateTime.now(),
+    // )
   ];
   void _addNewTransaction(String title, double amount) {
     final newTx = Transaction(
@@ -74,13 +85,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("Expense Tracker"),
+        backgroundColor: Colors.red,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () => _startAddNewTransaction(context),
           )
         ],
-        title: Text('Flutter App'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
@@ -95,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: double.infinity,
               child: Card(
-                color: Colors.blue,
+                color: Theme.of(context).primaryColor,
                 child: Text('Chart'),
                 elevation: 5,
               ),
